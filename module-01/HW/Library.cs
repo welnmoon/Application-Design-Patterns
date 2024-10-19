@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-// Класс Book
 public class Book
 {
     public string Title { get; set; }
@@ -23,7 +22,6 @@ public class Book
     }
 }
 
-// Класс Reader
 public class Reader
 {
     public string Name { get; set; }
@@ -43,7 +41,6 @@ public class Reader
     }
 }
 
-// Класс Library
 public class Library
 {
     public List<Book> Books { get; set; }
@@ -55,14 +52,12 @@ public class Library
         Readers = new List<Reader>();
     }
 
-    // Метод для добавления книги
     public void AddBook(Book book)
     {
         Books.Add(book);
         Console.WriteLine($"Book '{book.Title}' added to the library.");
     }
 
-    // Метод для удаления книги
     public void RemoveBook(string isbn)
     {
         Book book = Books.Find(b => b.ISBN == isbn);
@@ -77,14 +72,12 @@ public class Library
         }
     }
 
-    // Метод для регистрации читателя
     public void RegisterReader(Reader reader)
     {
         Readers.Add(reader);
         Console.WriteLine($"Reader '{reader.Name}' registered.");
     }
 
-    // Метод для удаления читателя
     public void RemoveReader(int readerId)
     {
         Reader reader = Readers.Find(r => r.ReaderId == readerId);
@@ -99,7 +92,6 @@ public class Library
         }
     }
 
-    // Метод для выдачи книги
     public void BorrowBook(string isbn, int readerId)
     {
         Book book = Books.Find(b => b.ISBN == isbn);
@@ -124,7 +116,6 @@ public class Library
         }
     }
 
-    // Метод для возврата книги
     public void ReturnBook(string isbn, int readerId)
     {
         Reader reader = Readers.Find(r => r.ReaderId == readerId);
@@ -153,31 +144,23 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        // Создаем библиотеку
         Library library = new Library();
 
-        // Создаем несколько книг
         Book book1 = new Book("C# Programming", "John Doe", "123456", 3);
         Book book2 = new Book("Design Patterns", "Jane Smith", "654321", 2);
 
-        // Добавляем книги в библиотеку
         library.AddBook(book1);
         library.AddBook(book2);
 
-        // Регистрируем читателя
         Reader reader1 = new Reader("Alice", 1);
         library.RegisterReader(reader1);
 
-        // Выдаем книгу читателю
         library.BorrowBook("123456", 1);
 
-        // Возвращаем книгу
         library.ReturnBook("123456", 1);
 
-        // Удаляем книгу из библиотеки
         library.RemoveBook("654321");
 
-        // Удаляем читателя
         library.RemoveReader(1);
     }
 }
